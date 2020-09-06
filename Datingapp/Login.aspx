@@ -9,7 +9,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            This is temporary login page<br />
         </div>
+        <br />
+        <br />
+        <asp:Button ID="Button1" runat="server" Text="Login" />
     </form>
 </body>
 </html>
