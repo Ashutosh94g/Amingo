@@ -8,4 +8,4 @@ O aapa saareya ne iss branch ch kam krna
 
 
 + When you open the project in Visual Studio you'll find a file named default.aspx
-+ you have to start from there
++ that is your home page 
