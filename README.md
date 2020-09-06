@@ -10,3 +10,5 @@ O aapa saareya ne iss branch ch kam krna
 
 + When you open the project in Visual Studio you'll find a file named default.aspx
 + that is your home page 
++ there are different modules present in navigation bar like Login, register,  chat
++ start making your respective modules
