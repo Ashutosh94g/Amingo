@@ -84,3 +84,16 @@ P:\GitHub\tinder_clone\Datingapp\obj\Debug\Datingapp.csproj.CoreCompileInputs.ca
 P:\GitHub\tinder_clone\Datingapp\obj\Debug\Datingapp.csproj.CopyComplete
 P:\GitHub\tinder_clone\Datingapp\obj\Debug\Datingapp.dll
 P:\GitHub\tinder_clone\Datingapp\obj\Debug\Datingapp.pdb
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.AspNet.SignalR.Core.dll
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.Owin.dll
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.Owin.Host.SystemWeb.dll
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.Owin.Security.dll
+P:\GitHub\tinder_clone\Datingapp\bin\Owin.dll
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.AspNet.SignalR.Core.pdb
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.AspNet.SignalR.Core.xml
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.Owin.xml
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.Owin.Host.SystemWeb.xml
+P:\GitHub\tinder_clone\Datingapp\bin\Microsoft.Owin.Security.xml
