@@ -6,11 +6,20 @@ using Microsoft.AspNet.SignalR;
 
 namespace Datingapp.signalr.hubs
 {
-    public class MyHub1 : Hub
+    /*public class ChatHub : Hub
     {
-        public void Hello()
+        static List<Users> ConnectedUsers = new List<Users>();
+        static List<Messages> CurrentMessage = new List<Messages>();
+        ConnClass ConnC = new ConnClass();
+
+        public void Connect(string userName)
         {
-            Clients.All.hello();
+            var id = Context.ConnectionId;
+
+            if (ConnectedUsers.Count(x => x.ConnectionId == id) == 0)
+            {
+
+            }
         }
-    }
+    }*/
 }
