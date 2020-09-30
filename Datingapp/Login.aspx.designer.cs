@@ -24,13 +24,13 @@ namespace Datingapp
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// TextBox1 control.
+        /// logUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox logUsername;
 
         /// <summary>
         /// Label2 control.
@@ -42,21 +42,21 @@ namespace Datingapp
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// TextBox2 control.
+        /// logPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox logPass;
 
         /// <summary>
-        /// Button1 control.
+        /// logSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button logSubmit;
     }
 }

@@ -24,13 +24,13 @@ namespace Datingapp
         protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
-        /// TextBox5 control.
+        /// regName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
+        protected global::System.Web.UI.WebControls.TextBox regName;
 
         /// <summary>
         /// Label1 control.
@@ -42,13 +42,13 @@ namespace Datingapp
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// TextBox1 control.
+        /// regUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox regUsername;
 
         /// <summary>
         /// Label2 control.
@@ -60,13 +60,13 @@ namespace Datingapp
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// TextBox2 control.
+        /// redPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox redPass;
 
         /// <summary>
         /// Label3 control.
@@ -132,12 +132,12 @@ namespace Datingapp
         protected global::System.Web.UI.WebControls.RadioButton RadioButton2;
 
         /// <summary>
-        /// Button1 control.
+        /// regSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button regSubmit;
     }
 }

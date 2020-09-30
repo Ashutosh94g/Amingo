@@ -6,7 +6,7 @@
               <asp:Label ID="Label6" runat="server" Text=" Enter Full Name"></asp:Label>     
           </td>
           <td>
-              <asp:TextBox ID="TextBox5" TextMode="SingleLine" runat="server"></asp:TextBox>
+              <asp:TextBox ID="regName" TextMode="SingleLine" runat="server"></asp:TextBox>
           </td>
       </tr>
       <tr>
@@ -14,7 +14,7 @@
               <asp:Label ID="Label1" runat="server" Text=" Enter Username"></asp:Label>     
           </td>
           <td>
-              <asp:TextBox ID="TextBox1" TextMode="SingleLine" runat="server"></asp:TextBox>
+              <asp:TextBox ID="regUsername" TextMode="SingleLine" runat="server"></asp:TextBox>
           </td>
       </tr>
       <tr>
@@ -22,7 +22,7 @@
               <asp:Label ID="Label2" runat="server" Text="Enter Password"></asp:Label>     
           </td>
           <td>
-              <asp:TextBox ID="TextBox2" TextMode="Password" runat="server"></asp:TextBox>
+              <asp:TextBox ID="redPass" TextMode="Password" runat="server"></asp:TextBox>
           </td>
       </tr>
         <tr>
@@ -55,5 +55,5 @@
        
 
   </table>
-    <asp:Button ID="Button1" runat="server" Text="Submit" />
+    <asp:Button ID="regSubmit" runat="server" Text="Submit" />
 </asp:Content>

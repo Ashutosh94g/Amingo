@@ -6,7 +6,7 @@
               <asp:Label ID="Label1" runat="server" Text="Username"></asp:Label>     
           </td>
           <td>
-              <asp:TextBox ID="TextBox1" TextMode="SingleLine" runat="server"></asp:TextBox>
+              <asp:TextBox ID="logUsername" TextMode="SingleLine" runat="server"></asp:TextBox>
           </td>
       </tr>
       <tr>
@@ -14,10 +14,10 @@
               <asp:Label ID="Label2" runat="server" Text="Password"></asp:Label>     
           </td>
           <td>
-              <asp:TextBox ID="TextBox2" TextMode="Password" runat="server"></asp:TextBox>
+              <asp:TextBox ID="logPass" TextMode="Password" runat="server"></asp:TextBox>
           </td>
       </tr>
 
   </table>
-    <asp:Button ID="Button1" runat="server" Text="Log in"  /></div>
+    <asp:Button ID="logSubmit" runat="server" Text="Log in"  /></div>
 </asp:Content>
