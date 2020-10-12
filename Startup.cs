@@ -1,3 +1,4 @@
+using Amingo.Data;
 using Amingo.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,7 @@ namespace Amingo
 			services.AddDbContext<UserContext>(option => option.UseMySQL(
 				Configuration.GetConnectionString("Default")
 			));
+			services.AddScoped<IUserData, MockUserData>();
 			services.AddControllersWithViews();
 			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Amingo.Models;
+using Amingo.Data;
 
 namespace Amingo.Controllers
 {
@@ -11,8 +12,10 @@ namespace Amingo.Controllers
 	[ApiController]
 	public class UsersController : ControllerBase
 	{
-		public UsersController()
+		private readonly IUserData _userData;
+		public UsersController(IUserData userData)
 		{
+			_userData = userData;
 		}
 
 		[HttpGet("")]
@@ -20,10 +23,9 @@ namespace Amingo.Controllers
 		{
 			// TODO: Your code here
 			await Task.Yield();
+			var userList = _userData.GetAllUsers();
 
-			return new List<User> {
-				new User(){id=1, first_name="Ashutosh", last_name="Modi", age=20, sex=Sex.male}
-			};
+			return Ok(userList);
 		}
 
 		[HttpGet("{id}")]
