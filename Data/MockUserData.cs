@@ -10,7 +10,7 @@ namespace Amingo.Data
 			var Users = new List<User>()
 			{
 				new User { id = 1, first_name = "Ashutosh", last_name = "Modi", age = 20, sex = Sex.male },
-				new User { id = 2, first_name = "Amanpreet", last_name = "Kaur", age = 20, sex = Sex.male }
+				new User { id = 2, first_name = "Amanpreet", last_name = "Kaur", age = 20, sex = Sex.female }
 			};
 			return Users;
 		}
