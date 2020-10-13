@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 
 namespace Amingo
 {
@@ -32,7 +33,10 @@ namespace Amingo
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			services.AddScoped<IUserData, MySqlUserData>();
-			services.AddControllersWithViews();
+			services.AddControllers().AddNewtonsoftJson(s =>
+			{
+				s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+			});
 			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{

@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Amingo.Dtos;
 using Amingo.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Amingo.Data
 {
@@ -10,5 +13,9 @@ namespace Amingo.Data
 		User GetUserById(int id);
 
 		void CreateUser(User newUser);
+		void UpdateUser(ActionResult<UserReadDto> originalUser);
+
+		void DeleteUser(User deletingUser);
+		//void UpdateUser(Task<ActionResult<User>> originalUser);
 	}
 }

@@ -7,6 +7,7 @@ using Amingo.Models;
 using Amingo.Data;
 using AutoMapper;
 using Amingo.Dtos;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Amingo.Controllers
 {
@@ -24,20 +25,18 @@ namespace Amingo.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<UserReadDto>>> GetUsers()
+		public ActionResult<IEnumerable<UserReadDto>> GetUsers()
 		{
 			// TODO: Your code here
-			await Task.Yield();
 			var userList = _userData.GetAllUsers();
 
 			return Ok(_mapper.Map<IEnumerable<UserReadDto>>(userList));
 		}
 
 		[HttpGet("{id}", Name = "GetUserById")]
-		public async Task<ActionResult<User>> GetUserById(int id)
+		public ActionResult<UserReadDto> GetUserById(int id)
 		{
 			// TODO: Your code here
-			await Task.Yield();
 
 			var user = _userData.GetUserById(id);
 			if (user != null)
@@ -56,6 +55,42 @@ namespace Amingo.Controllers
 			var userReadObj = _mapper.Map<UserReadDto>(userModelObj);
 
 			return CreatedAtRoute(nameof(GetUserById), new { id = userReadObj.id, userReadObj });
+		}
+
+		[HttpPatch("{id}")]
+		public ActionResult PatchUser(int id, JsonPatchDocument<UserUpdateDto> updatedPatchUser)
+		{
+			var originalUser = _userData.GetUserById(id);
+			if (originalUser == null)
+			{
+				return NotFound();
+			}
+			var userToPatch = _mapper.Map<UserUpdateDto>(originalUser);
+			updatedPatchUser.ApplyTo(userToPatch, ModelState);
+
+			if (!TryValidateModel(userToPatch))
+			{
+				return ValidationProblem(ModelState);
+			}
+
+			_mapper.Map(userToPatch, originalUser);
+			_userData.UpdateUser(_mapper.Map<UserReadDto>(originalUser));
+			_userData.SaveChanges();
+
+			return NoContent();
+		}
+
+		[HttpDelete("{id}")]
+		public ActionResult DeleteUser(int id)
+		{
+			var deletingUser = _userData.GetUserById(id);
+			if (deletingUser == null)
+			{
+				return NotFound();
+			}
+			_userData.DeleteUser(_mapper.Map<User>(deletingUser));
+			_userData.SaveChanges();
+			return NoContent();
 		}
 	}
 }

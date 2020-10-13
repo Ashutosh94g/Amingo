@@ -1,11 +1,18 @@
 using System.Collections.Generic;
+using Amingo.Dtos;
 using Amingo.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Amingo.Data
 {
 	public class MockUserData : IUserData
 	{
 		public void CreateUser(User newUser)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public void DeleteUser(User deletingUser)
 		{
 			throw new System.NotImplementedException();
 		}
@@ -26,6 +33,11 @@ namespace Amingo.Data
 		}
 
 		public bool SaveChanges()
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public void UpdateUser(ActionResult<UserReadDto> originalUser)
 		{
 			throw new System.NotImplementedException();
 		}
