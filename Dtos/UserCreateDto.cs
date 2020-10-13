@@ -14,5 +14,6 @@ namespace Amingo.Dtos
 		public int age { get; set; }
 		[Required]
 		public Models.Sex sex { get; set; }
+		public string photoUrl { get; set; }
 	}
 }

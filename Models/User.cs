@@ -17,6 +17,7 @@ namespace Amingo.Models
 		public int age { get; set; }
 		[Required]
 		public Sex sex { get; set; }
+		public string photoUrl { get; set; }
 
 	}
 	public enum Sex
