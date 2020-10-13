@@ -9,6 +9,7 @@ namespace Amingo.Profiles
 		public UsersProfile()
 		{
 			CreateMap<User, UserReadDto>();
+			CreateMap<UserCreateDto, User>();
 		}
 	}
 }

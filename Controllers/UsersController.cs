@@ -23,7 +23,7 @@ namespace Amingo.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet("")]
+		[HttpGet]
 		public async Task<ActionResult<IEnumerable<UserReadDto>>> GetUsers()
 		{
 			// TODO: Your code here
@@ -33,7 +33,7 @@ namespace Amingo.Controllers
 			return Ok(_mapper.Map<IEnumerable<UserReadDto>>(userList));
 		}
 
-		[HttpGet("{id}")]
+		[HttpGet("{id}", Name = "GetUserById")]
 		public async Task<ActionResult<User>> GetUserById(int id)
 		{
 			// TODO: Your code here
@@ -45,7 +45,17 @@ namespace Amingo.Controllers
 				return Ok(_mapper.Map<UserReadDto>(user));
 			}
 			return NotFound();
+		}
 
+		[HttpPost]
+		public ActionResult<UserReadDto> CreateUser(UserCreateDto newUser)
+		{
+			var userModelObj = _mapper.Map<User>(newUser);
+			_userData.CreateUser(userModelObj);
+			_userData.SaveChanges();
+			var userReadObj = _mapper.Map<UserReadDto>(userModelObj);
+
+			return CreatedAtRoute(nameof(GetUserById), new { id = userReadObj.id, userReadObj });
 		}
 	}
 }

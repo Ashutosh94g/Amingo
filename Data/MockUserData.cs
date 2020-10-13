@@ -5,6 +5,11 @@ namespace Amingo.Data
 {
 	public class MockUserData : IUserData
 	{
+		public void CreateUser(User newUser)
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public IEnumerable<User> GetAllUsers()
 		{
 			var Users = new List<User>()
@@ -18,6 +23,11 @@ namespace Amingo.Data
 		public User GetUserById(int id)
 		{
 			return new User { id = 2, first_name = "Amanpreet", last_name = "Kaur", age = 20, sex = Sex.male };
+		}
+
+		public bool SaveChanges()
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }
