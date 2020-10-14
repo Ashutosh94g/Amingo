@@ -14,10 +14,6 @@ namespace Amingo.Models
 		[MaxLength(20)]
 		public string last_name { get; set; }
 		[Required]
-		public string username { get; set; }
-		[Required]
-		public string password { get; set; }
-		[Required]
 		public int age { get; set; }
 		[Required]
 		public Sex sex { get; set; }
