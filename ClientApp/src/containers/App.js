@@ -5,12 +5,12 @@ import {
   Route
 } from "react-router-dom";
 
-import Header from "./Header";
-import TinderCards from "./TinderCards";
-import SwipeButtons from "./SwipeButtons";
-import Chats from "./Chats";
-import ChatScreen from "./ChatScreen";
-import Login from "./Login";
+import Header from "../components/Header/Header";
+import TinderCards from "../components/TinderCards/TinderCards";
+import SwipeButtons from "../components/SwipeButtons/SwipeButtons";
+import Chats from "../components/Chats/Chats";
+import ChatScreen from "../components/Chats/Chat/ChatScreen/ChatScreen";
+import Login from "../components/Login/Login";
 import './App.css';
 
 

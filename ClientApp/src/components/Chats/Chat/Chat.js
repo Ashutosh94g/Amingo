@@ -5,8 +5,7 @@ import Avatar from "@material-ui/core/Avatar";
 
 import "./Chat.css";
 
-function Chat({ name, message, profilePic, timeStamp}) {
-	return (
+const Chat = ({ name, message, profilePic, timeStamp}) => (
 		<Link to={`chat/${name}`}>
 			<div className="chat">
 				<Avatar className="chat__image" alt={name} src={profilePic} />
@@ -18,6 +17,5 @@ function Chat({ name, message, profilePic, timeStamp}) {
 			</div>
 		</Link>
 	)
-}
 
 export default Chat
