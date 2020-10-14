@@ -10,5 +10,6 @@ namespace Amingo.Dtos
 		public int age { get; set; }
 		public Sex sex { get; set; }
 		public string photoUrl { get; set; }
+		public string username { get; set; }
 	}
 }

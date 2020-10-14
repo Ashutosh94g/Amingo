@@ -15,5 +15,7 @@ namespace Amingo.Dtos
 		[Required]
 		public Models.Sex sex { get; set; }
 		public string photoUrl { get; set; }
+		public string username { get; set; }
+		public string password { get; set; }
 	}
 }

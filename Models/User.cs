@@ -18,6 +18,10 @@ namespace Amingo.Models
 		[Required]
 		public Sex sex { get; set; }
 		public string photoUrl { get; set; }
+		[RegularExpression("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")]
+		public string username { get; set; }
+		[RegularExpression("^((?=.*?[A - Z])(?=.*?[a - z])(?=.*?[0 - 9]) | (?=.*?[A - Z])(?=.*?[a - z])(?=.*?[^a - zA - Z0 - 9]) | (?=.*?[A - Z])(?=.*?[0 - 9])(?=.*?[^a - zA - Z0 - 9]) | (?=.*?[a - z])(?=.*?[0 - 9])(?=.*?[^a - zA - Z0 - 9])).{8,}$")]
+		public string password { get; set; }
 
 	}
 	public enum Sex

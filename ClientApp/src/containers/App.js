@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,32 +15,35 @@ import './App.css';
 
 
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/chat/:person">
-            <Header backButton="/chat" />
-            <ChatScreen />
-          </Route>
-          <Route path="/Login">
-            <Header backButton="/" />
-            <Login />
-          </Route>
-          <Route path="/chat">
-            <Header backButton="/" />
-            <Chats />
-          </Route>
-          <Route path="/">
-            <Header />
-            <TinderCards />
-            <SwipeButtons />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
-  );
+class App extends Component {
+
+	render() {
+		return (
+			<div className="App">
+				<Router>
+					<Switch>
+						<Route path="/chat/:person">
+							<Header backButton="/chat" />
+							<ChatScreen />
+						</Route>
+						<Route path="/Login">
+							<Header backButton="/" />
+							<Login />
+						</Route>
+						<Route path="/chat">
+							<Header backButton="/" />
+							<Chats />
+						</Route>
+						<Route path="/">
+							<Header />
+							<TinderCards />
+							<SwipeButtons />
+						</Route>
+					</Switch>
+				</Router>
+			</div>
+		)
+	}
 }
 
 export default App;
