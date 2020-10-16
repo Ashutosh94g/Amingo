@@ -1,8 +1,13 @@
 *{
-  margin:0;
+  margin:auto;
+}
+
+body *{
+  margin: auto;
 }
 
 body::before{
+  
   content: "";
   position: absolute;
   top: 0;
