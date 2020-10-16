@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route
 } from "react-router-dom";
@@ -13,6 +13,8 @@ import ChatScreen from "../components/Chats/Chat/ChatScreen/ChatScreen";
 import Login from "../components/Login/Login";
 import './App.css';
 
+import Home from './Home';
+
 
 
 class App extends Component {
@@ -20,7 +22,15 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Router>
+				<BrowserRouter>
+				<Route path="/" component={Header} />
+				<Route path="/" exact component={Home} />
+				<Route path="/Chats" exact component={Chats} />	
+				<Route path="/Login" exact component={Login} />
+				</BrowserRouter>
+				
+
+				{/* <Router>
 					<Switch>
 						<Route path="/chat/:person">
 							<Header backButton="/chat" />
@@ -40,7 +50,7 @@ class App extends Component {
 							<SwipeButtons />
 						</Route>
 					</Switch>
-				</Router>
+				</Router> */}
 			</div>
 		)
 	}

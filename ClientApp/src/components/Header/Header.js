@@ -15,15 +15,17 @@ function Header({backButton}) {
 					<ArrowBackIosIcon className="header__icon" fontSize="large" />
 				</IconButton>
 			):(
-				<IconButton>
-					<PersonIcon className="header__icon" fontSize="large" />
+					<IconButton>
+						<Link to="/login">
+							<PersonIcon className="header__icon" fontSize="large" />
+						</Link>
 				</IconButton>
 			)}
 			
 			<Link to="/">
 				<img className="header__logo" src = "https://1000logos.net/wp-content/uploads/2018/07/tinder-logo-768x432.png" alt='tinder-logo' />
 			</Link>
-			<Link to="/chat">
+			<Link to="/chats">
 				<IconButton>
 					<ForumIcon className="header__icon" fontSize="large" />
 				</IconButton>
