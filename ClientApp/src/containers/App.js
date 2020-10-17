@@ -20,9 +20,13 @@ class App extends Component {
 		return (
 			<div className="App">
 				<BrowserRouter>
-				<Route path="/" component={Header} />
-				<Route path="/" exact component={Home} />
-				<Route path="/Chats" exact component={Chats} />	
+				<Route path="/" exact component={Header} />
+					<Route path="/" exact component={Home} />
+					<Route path="/Chats" exact>
+						<Header backButton="/" />
+						<Chats />
+				</Route>
+				<Route path="/Login" exact component={Header} />
 				<Route path="/Login" exact component={Login} />
 				</BrowserRouter>
 				

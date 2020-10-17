@@ -36,7 +36,7 @@ class Login extends Component {
 			.then(response => {
 				alert(response);
 			}).catch(error => {
-				alert("Sign Up successful");
+				alert(error);
 		})
 	}
 	changeHandler = (e) => {
