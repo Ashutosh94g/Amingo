@@ -21,7 +21,7 @@ class TinderCards extends Component {
 						<TinderCard
 							className="swipe" 
 							key={person.id}
-							preventSwipe={"up", "down"}
+							//preventSwipe={"up", "down"}
 						>
 							<div className="card" style={{backgroundImage:`url(${person.photoUrl})`}}>
 								<h3>{person.first_name}</h3>

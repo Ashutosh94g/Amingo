@@ -54,7 +54,8 @@ namespace Amingo.Controllers
 			_userData.SaveChanges();
 			var userReadObj = _mapper.Map<UserReadDto>(userModelObj);
 
-			return CreatedAtRoute(nameof(GetUserById), new { id = userReadObj.id, userReadObj });
+			// return CreatedAtRoute(nameof(GetUserById), new { id = userReadObj.id, userReadObj });
+			return NoContent();
 		}
 
 		[HttpPatch("{id}")]

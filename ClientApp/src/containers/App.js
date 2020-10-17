@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 import {
   BrowserRouter,
-  Switch,
   Route
 } from "react-router-dom";
 
 import Header from "../components/Header/Header";
-import TinderCards from "../components/TinderCards/TinderCards";
-import SwipeButtons from "../components/SwipeButtons/SwipeButtons";
 import Chats from "../components/Chats/Chats";
-import ChatScreen from "../components/Chats/Chat/ChatScreen/ChatScreen";
 import Login from "../components/Login/Login";
+// import TempLogin from "../components/Login/TempLogin";
 import './App.css';
 
 import Home from './Home';

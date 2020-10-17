@@ -16,7 +16,7 @@ namespace Amingo.Models
 		[Required]
 		public int age { get; set; }
 		[Required]
-		public Sex sex { get; set; }
+		public string sex { get; set; }
 		public string photoUrl { get; set; }
 		[RegularExpression("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")]
 		public string username { get; set; }

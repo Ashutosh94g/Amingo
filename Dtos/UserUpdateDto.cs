@@ -11,7 +11,7 @@ namespace Amingo.Dtos
 		[MaxLength(20)]
 		public string last_name { get; set; }
 		[Required]
-		public Models.Sex sex { get; set; }
+		public string sex { get; set; }
 		public string photoUrl { get; set; }
 
 		[Required]
