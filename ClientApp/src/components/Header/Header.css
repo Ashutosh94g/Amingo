@@ -3,10 +3,9 @@
   }
   
  .header *{
-	 margin: 0;
- } 
+	margin: 0;
+} 
 .header {
-	
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

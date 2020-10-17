@@ -7,17 +7,20 @@ import {
 import Header from "../components/Header/Header";
 import Chats from "../components/Chats/Chats";
 import Login from "../components/Login/Login";
+import Profile from "../components/Profile/Profile"
 // import TempLogin from "../components/Login/TempLogin";
 import './App.css';
 
 import Home from './Home';
+import EditProfile from '../components/Profile/EditProfile';
 
 
 
 class App extends Component {
 
 	state = {
-		userlogedin : false
+		userlogedin: false,
+		id: 9
 	}
 
 	loginStateHandler = () => {
@@ -39,7 +42,14 @@ class App extends Component {
 						<Chats />
 				</Route>
 				{/* <Route path="/Login" exact component={Header} /> */}
-				<Route path="/Login" exact component={Login} />
+				<Route path="/profile" exact>
+					<Header backButton="/" />
+					<Profile id={this.state.id} />
+				</Route>
+				<Route path="/profile/edit" exact>
+					<Header backButton="/profile" />
+					<EditProfile id={this.state.id} />
+				</Route>
 				</BrowserRouter>
 
 				

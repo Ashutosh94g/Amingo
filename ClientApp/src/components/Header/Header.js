@@ -16,7 +16,7 @@ function Header({backButton}) {
 				</IconButton>
 			):(
 					<IconButton>
-						<Link to="/login">
+						<Link to="/profile">
 							<PersonIcon className="header__icon" fontSize="large" />
 						</Link>
 				</IconButton>
