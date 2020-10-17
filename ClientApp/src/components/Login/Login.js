@@ -12,29 +12,37 @@ import "./Login.css";
 
 class Login extends Component {
 
-	constructor(props) {
-		super(props);
-	}
+	// constructor(props) {
+	// 	super(props);
+	// }
 	
 	state = {
 		classList: "container",
 		fields: {
-			first_name: null,
-			last_name: null,
-			age: null,
-			sex: null,
-			username: null,
-			password: null,
-			photoUrl: null
-		}
+			first_name: "",
+			last_name: "",
+			age: 18,
+			sex: "",
+			username: "",
+			password: "",
+			photoUrl: ""
+		},
+		getData: [],
+		signupFields: {
+			username: "",
+			password: ""
+		},
+		logedin: false
 	}
 
 	submitHandler = (e) => {
 		e.preventDefault();
 		console.log(this.state.fields)
+		
 		axios.post("/api/Users", this.state.fields)
 			.then(response => {
 				alert(response);
+				this.props.loginer();
 			}).catch(error => {
 				alert(error);
 		})
@@ -44,6 +52,33 @@ class Login extends Component {
 			fields: {
 				...this.state.fields,
 				[e.target.name] : e.target.value 
+		}})
+	}
+
+	loginsubmitHandler = (e) => {
+		e.preventDefault();
+		console.log(e);
+		axios.get("/api/Users").then(response => {
+			this.setState({ getData: response.data })
+			this.state.getData.map(user => {
+				if ((user.username === this.state.signupFields.username) && (user.password === this.state.signupFields.password)) {
+					this.setState({logedin: true})
+					this.props.loginer();
+				}
+				return null;
+			})
+			if (!this.state.logedin) {
+				alert("please enter correct details");
+			}
+		}).catch(error => {
+			alert(error);
+		})
+	}
+	signInChangeHandler = (e) => {
+		this.setState({
+			signupFields: {
+			...this.state.signupFields,
+			[e.target.name]: e.target.value
 		}})
 	}
 
@@ -77,7 +112,6 @@ class Login extends Component {
 							fullWidth
 							variant="filled"
 							label="First name"
-							id="standard-size-normal"
 							type="text" value={first_name}
 							onChange={this.changeHandler}
 							name="first_name"
@@ -86,7 +120,6 @@ class Login extends Component {
 							fullWidth
 							variant="filled"
 							label="Last name"
-							id="standard-size-normal"
 							type="text" value={last_name}
 							onChange={this.changeHandler}
 							name="last_name"
@@ -95,7 +128,6 @@ class Login extends Component {
 							fullWidth
 							variant="filled"
 							label="age"
-							id="standard-size-normal"
 							type="number" value={age}
 							onChange={this.changeHandler}
 							name="age"
@@ -104,7 +136,6 @@ class Login extends Component {
 							fullWidth
 							variant="filled"
 							label="Sex"
-							id="standard-size-normal"
 							type="text" value={sex}
 							onChange={this.changeHandler}
 							name="sex"
@@ -114,7 +145,6 @@ class Login extends Component {
 							fullWidth
 							variant="filled"
 							label="Username"
-							id="standard-size-normal"
 							type="username"
 							value={username}
 							onChange={this.changeHandler}
@@ -123,7 +153,6 @@ class Login extends Component {
 						<TextField
 							fullWidth
 							variant="filled"
-							id="standard-password-input"
 							label="Password"
 							type="password"
 							autoComplete="current-password"
@@ -136,7 +165,6 @@ class Login extends Component {
 						<TextField
 							fullWidth
 							variant="filled"
-							id="standard-password-input"
 							label="photoUrl"
 							type="text"
 							autoComplete="current-password"
@@ -150,23 +178,33 @@ class Login extends Component {
 				</div>
 				<div className="form-container sign-in-container">
 
-					<form className="form__SignIn" action="#">
+					<form className="form__SignIn" action="#" onSubmit={this.loginsubmitHandler}>
 						<h1 className="signin__account">Sign in</h1>
 						<div className="social-container">
 							{buttons}
 						</div>
 						{/* <span>or use your account</span> */}
-						<TextField fullWidth variant="filled" label="Username" id="standard-size-normal" type="username" />
 						<TextField
 							fullWidth
 							variant="filled"
-							id="standard-password-input"
+							label="Username"
+							type="username"
+							name="username"
+							value={this.state.signupFields.username}
+							onChange={this.signInChangeHandler}
+						/>
+						<TextField
+							fullWidth
+							variant="filled"
 							label="Password"
 							type="password"
 							autoComplete="current-password"
+							name="password"
+							value={this.state.signupFields.password}
+							onChange={this.signInChangeHandler}
 						/>
 						<Link href="#" color="inherit" style={{ padding: 10 }}>Forgot your password?</Link>
-						<button className="signIn__button">Sign In</button>
+						<button className="signIn__button" type="submit">Sign In</button>
 					</form>
 
 				</div>
