@@ -35,24 +35,25 @@ class App extends Component {
 		return (
 			<div className="App">
 				<BrowserRouter>
-					<Route path="/" exact>
-						{this.state.userlogedin ? 
-						<div><Route path="/" exact component={Header} /><Home /></div>: <Login loginer={this.loginStateHandler} getId={(id) => this.getUserId(id)} />
-					}
-					</Route>
-					<Route path="/Chats" exact>
-						<Header backButton="/" />
-						<Chats />
-				</Route>
-				{/* <Route path="/Login" exact component={Header} /> */}
-				<Route path="/profile" exact>
-					<Header backButton="/" />
-					<Profile id={this.state.id} />
-				</Route>
-				<Route path="/profile/edit" exact>
-					<Header backButton="/profile" />
-					<EditProfile id={this.state.id} />
-				</Route>
+					{!this.state.userlogedin ?
+						<Route path="/">
+							<Login loginer={this.loginStateHandler} getId={(id) => this.getUserId(id)} />
+						</Route> : <div><Route path="/" exact>
+								<div><Route path="/" exact component={Header} /><Home /></div>
+						</Route>
+							<Route path="/Chats" exact>
+								<Header backButton="/" />
+								<Chats />
+							</Route>
+							{/* <Route path="/Login" exact component={Header} /> */}
+							<Route path="/profile" exact>
+								<Header backButton="/" />
+								<Profile id={this.state.id} />
+							</Route>
+							<Route path="/profile/edit" exact>
+								<Header backButton="/profile" />
+								<EditProfile id={this.state.id} />
+							</Route></div>}
 				</BrowserRouter>
 
 				
