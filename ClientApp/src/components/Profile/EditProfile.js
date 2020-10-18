@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom"
 import axios from "axios";
 
 
@@ -8,8 +7,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
@@ -17,27 +14,55 @@ class EditProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			fields: {}
+			fields: {},
+			datafetched: false,
+			putFields: {},
+			patchFields: [],
+			patchArray: []
 		}
 		
 	}
 	componentDidMount() {
-		axios.get(`api/Users/${this.props.id}`).then(response => {
-			this.setState({ fields: response.data })
-			console.log(this.state.fields)
-		}).catch(error => {
-			alert(error);
-		})
+		if (!this.state.datafetched) {
+			axios.get(`api/Users/${this.props.id}`).then(response => {
+				this.setState({ fields: response.data })
+				console.log(this.state.fields)
+				this.setState({ datafetched: true })
+			}).catch(error => {
+				alert(error);
+			})
+		}
 	}
 	changeHandler = (e) => {
+		var lpatchFields = this.state.patchFields
+		lpatchFields.push(e.target.name)
 		this.setState({
 			fields: {
-			...this.state.fields,
-			[e.target.name]: e.target.value
-		}})
+				...this.state.fields,
+				[e.target.name]: e.target.value
+			},
+			putFields: {
+				...this.state.putFields,
+				[e.target.name]: e.target.value
+			},
+			patchFields: lpatchFields
+		})
 	}
 	submitHandler = (e) => {
-		alert("worked")
+		e.preventDefault();
+		console.log(this.state.putFields);
+		this.state.patchFields.forEach(element => {
+			let lpatchArray = this.state.patchArray
+			lpatchArray.push({ "op": "replace", "path": element, "value": this.state.putFields[element] })
+			this.setState({ patchArray: lpatchArray });
+		});
+		console.log(this.state.patchArray);
+		axios.patch(`/api/Users/${this.state.fields.id}`, this.state.patchArray).then(response => {
+			console.log(response)
+			alert("Your profile is updated");
+		}).catch(error => {
+			console.log(error)
+		})
 	}
 	
 	render() { 
@@ -58,17 +83,18 @@ class EditProfile extends Component {
 					<Typography gutterBottom variant="p" component="p">
             age: {age} | sex: {sex}
           </Typography>
-          <TextField label="username" placeholder={username} value={username} onChange={this.changeHandler} />
-          <TextField label="first_name" placeholder={first_name} value={first_name} onChange={this.changeHandler} />
-          <TextField label="last_name" placeholder={last_name} value={last_name} onChange={this.changeHandler} />
-          <TextField label="photoUrl" placeholder={photoUrl} value={photoUrl} onChange={this.changeHandler} />
-          <TextField label="old-password" type="password" placeholder={password} onChange={this.changeHandler} value={password} />
+          <TextField label="username" name="username" placeholder={username} value={username} onChange={this.changeHandler} />
+          <TextField label="first_name" name="first_name" placeholder={first_name} value={first_name} onChange={this.changeHandler} />
+          <TextField label="last_name"  name="last_name" placeholder={last_name} value={last_name} onChange={this.changeHandler} />
+          <TextField label="photoUrl" name="photoUrl" placeholder={photoUrl} value={photoUrl} onChange={this.changeHandler} />
+          <TextField label="old-password" name="password" type="password" placeholder={password} onChange={this.changeHandler} value={password} />
           <TextField label="new-password" type="password" placeholder="new-password" onChange={this.changeHandler} />
 					
         </CardContent>
       </CardActionArea>
 				<CardActions>
-					<Link to="/">
+					<button type="submit">SAVE</button>
+					{/* <Link to="/">
 						<Button
 							type="submit"
 							variant="contained"
@@ -77,7 +103,7 @@ class EditProfile extends Component {
 							className="delete__button"
 							startIcon={<SaveIcon />}>
 						save</Button>
-					</Link>
+					</Link> */}
       </CardActions>
 		</form>
     </Card>

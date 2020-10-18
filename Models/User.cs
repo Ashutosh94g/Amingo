@@ -20,7 +20,7 @@ namespace Amingo.Models
 		public string photoUrl { get; set; }
 		[RegularExpression("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")]
 		public string username { get; set; }
-		[RegularExpression("^((?=.*?[A - Z])(?=.*?[a - z])(?=.*?[0 - 9]) | (?=.*?[A - Z])(?=.*?[a - z])(?=.*?[^a - zA - Z0 - 9]) | (?=.*?[A - Z])(?=.*?[0 - 9])(?=.*?[^a - zA - Z0 - 9]) | (?=.*?[a - z])(?=.*?[0 - 9])(?=.*?[^a - zA - Z0 - 9])).{8,}$")]
+		[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)\S{6,20}$")]
 		public string password { get; set; }
 
 	}
