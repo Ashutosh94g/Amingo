@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
 import {
   BrowserRouter,
-  Route
+	Route,
+	Redirect
 } from "react-router-dom";
 
 import Header from "../components/Header/Header";
 import Chats from "../components/Chats/Chats";
 import Login from "../components/Login/Login";
 import Profile from "../components/Profile/Profile"
-// import TempLogin from "../components/Login/TempLogin";
 import './App.css';
 
 import Home from './Home';
 import EditProfile from '../components/Profile/EditProfile';
+import DeleteProfile from "../components/Profile/DeleteProfile";
 
 
 
@@ -25,7 +26,7 @@ class App extends Component {
 
 	loginStateHandler = () => {
 		const userlog = this.state.userlogedin;
-		this.setState({userlogedin: !userlog})
+		this.setState({ userlogedin: !userlog })
 	}
 	getUserId = (id) => {
 		this.setState({id: id})
@@ -53,31 +54,14 @@ class App extends Component {
 							<Route path="/profile/edit" exact>
 								<Header backButton="/profile" />
 								<EditProfile id={this.state.id} />
-							</Route></div>}
+							</Route>
+						<Route path="/profile/delete" exact>
+								<Header backButton="/profile" />
+								<DeleteProfile id={this.state.id} loginer={this.loginStateHandler} />
+								<Redirect to='/' />
+							</Route></div>
+					}
 				</BrowserRouter>
-
-				
-				{/* <Router>
-					<Switch>
-						<Route path="/chat/:person">
-							<Header backButton="/chat" />
-							<ChatScreen />
-						</Route>
-						<Route path="/Login">
-							<Header backButton="/" />
-							<Login />
-						</Route>
-						<Route path="/chat">
-							<Header backButton="/" />
-							<Chats />
-						</Route>
-						<Route path="/">
-							<Header />
-							<TinderCards />
-							<SwipeButtons />
-						</Route>
-					</Switch>
-				</Router> */}
 			</div>
 		)
 	}
