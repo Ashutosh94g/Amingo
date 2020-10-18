@@ -27,6 +27,9 @@ class App extends Component {
 		const userlog = this.state.userlogedin;
 		this.setState({userlogedin: !userlog})
 	}
+	getUserId = (id) => {
+		this.setState({id: id})
+	}
 
 	render() {
 		return (
@@ -34,7 +37,7 @@ class App extends Component {
 				<BrowserRouter>
 					<Route path="/" exact>
 						{this.state.userlogedin ? 
-						<div><Route path="/" exact component={Header} /><Home /></div>: <Login loginer={this.loginStateHandler} />
+						<div><Route path="/" exact component={Header} /><Home /></div>: <Login loginer={this.loginStateHandler} getId={(id) => this.getUserId(id)} />
 					}
 					</Route>
 					<Route path="/Chats" exact>

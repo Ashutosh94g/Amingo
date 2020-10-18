@@ -62,7 +62,8 @@ class Login extends Component {
 			this.setState({ getData: response.data })
 			this.state.getData.map(user => {
 				if ((user.username === this.state.signupFields.username) && (user.password === this.state.signupFields.password)) {
-					this.setState({logedin: true})
+					this.setState({ logedin: true })
+					this.props.getId(user.id);
 					this.props.loginer();
 				}
 				return null;
