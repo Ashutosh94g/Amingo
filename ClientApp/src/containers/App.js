@@ -58,7 +58,9 @@ class App extends Component {
 						<Route path="/profile/delete" exact>
 								<Header backButton="/profile" />
 								<DeleteProfile id={this.state.id} loginer={this.loginStateHandler} />
-								<Redirect to='/' />
+								{!this.state.userlogedin ? 
+									<Redirect to="/" />: null
+								}
 							</Route></div>
 					}
 				</BrowserRouter>

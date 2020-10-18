@@ -56,7 +56,7 @@ class DeleteProfile extends Component {
         </CardContent>
       </CardActionArea>
 				<CardActions>
-					<Link to="/profile/delete">
+					<Link to="/">
 						<Button size="small" color="secondary" startIcon={<DeleteIcon />} onClick={this.clickHandler}>
 							Delete
 						</Button>
