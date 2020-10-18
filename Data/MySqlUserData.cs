@@ -40,7 +40,7 @@ namespace Amingo.Data
 			return (_context.SaveChanges() >= 0);
 		}
 
-		public void UpdateUser(ActionResult<UserReadDto> originalUser)
+		public void UpdateUser(UserUpdateDto originalUser)
 		{
 			//updating data using dbContext 
 		}

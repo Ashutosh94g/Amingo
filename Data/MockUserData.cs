@@ -37,7 +37,7 @@ namespace Amingo.Data
 			throw new System.NotImplementedException();
 		}
 
-		public void UpdateUser(ActionResult<UserReadDto> originalUser)
+		public void UpdateUser(UserUpdateDto originalUser)
 		{
 			throw new System.NotImplementedException();
 		}

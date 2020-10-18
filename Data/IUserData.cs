@@ -13,7 +13,7 @@ namespace Amingo.Data
 		User GetUserById(int id);
 
 		void CreateUser(User newUser);
-		void UpdateUser(ActionResult<UserReadDto> originalUser);
+		void UpdateUser(UserUpdateDto originalUser);
 
 		void DeleteUser(User deletingUser);
 		//void UpdateUser(Task<ActionResult<User>> originalUser);

@@ -58,6 +58,22 @@ namespace Amingo.Controllers
 			return NoContent();
 		}
 
+		[HttpPut("{id}")]
+		public ActionResult PutUser(int id, UserUpdateDto updatedPutUser)
+		{
+			var userModel = _userData.GetUserById(id);
+			if (userModel == null)
+			{
+				return NotFound();
+			}
+			_mapper.Map(updatedPutUser, userModel);
+			var userUpdateDto = _mapper.Map<UserUpdateDto>(userModel);
+			_userData.UpdateUser(userUpdateDto);
+			_userData.SaveChanges();
+
+			return NoContent();
+		}
+
 		[HttpPatch("{id}")]
 		public ActionResult PatchUser(int id, JsonPatchDocument<UserUpdateDto> updatedPatchUser)
 		{
@@ -75,7 +91,7 @@ namespace Amingo.Controllers
 			}
 
 			_mapper.Map(userToPatch, originalUser);
-			_userData.UpdateUser(_mapper.Map<UserReadDto>(originalUser));
+			_userData.UpdateUser(_mapper.Map<UserUpdateDto>(originalUser));
 			_userData.SaveChanges();
 
 			return NoContent();
