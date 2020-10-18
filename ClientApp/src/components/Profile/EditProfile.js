@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 
@@ -87,13 +88,14 @@ class EditProfile extends Component {
           <TextField label="first_name" name="first_name" placeholder={first_name} value={first_name} onChange={this.changeHandler} />
           <TextField label="last_name"  name="last_name" placeholder={last_name} value={last_name} onChange={this.changeHandler} />
           <TextField label="photoUrl" name="photoUrl" placeholder={photoUrl} value={photoUrl} onChange={this.changeHandler} />
-          <TextField label="old-password" name="password" type="password" placeholder={password} onChange={this.changeHandler} value={password} />
-          <TextField label="new-password" type="password" placeholder="new-password" onChange={this.changeHandler} />
+          <TextField label="new-password" name="password" type="password" placeholder="new-password" onChange={this.changeHandler} />
 					
         </CardContent>
       </CardActionArea>
 				<CardActions>
-					<button type="submit">SAVE</button>
+					<Link to="/">
+						<button type="submit">SAVE</button>
+					</Link>
 					{/* <Link to="/">
 						<Button
 							type="submit"

@@ -49,7 +49,7 @@ class App extends Component {
 							{/* <Route path="/Login" exact component={Header} /> */}
 							<Route path="/profile" exact>
 								<Header backButton="/" />
-								<Profile id={this.state.id} />
+								<Profile id={this.state.id} loginer={this.loginStateHandler} />
 							</Route>
 							<Route path="/profile/edit" exact>
 								<Header backButton="/profile" />

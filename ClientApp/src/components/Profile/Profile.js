@@ -11,7 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import "./Profile.css"
 import Axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 
 class Profile extends Component {
@@ -58,6 +58,11 @@ class Profile extends Component {
 							Edit
 						</Button>
 					</Link>
+					<Link to="/">
+						<Button size="small" color="primary" onClick={this.props.loginer}>
+							Logout
+						</Button>
+					</Link>
 					<Link to="/profile/delete">
 						<Button size="small" color="secondary" startIcon={<DeleteIcon />}>
 							Delete
@@ -65,31 +70,6 @@ class Profile extends Component {
 					</Link>
       </CardActions>
     </Card>
-			// <div className="background">
-			// 	<div className="main">
-			// 		<div className="rowfriend">
-			// 			<div className="one">
-			// 				<div className="img" > 
-			// 					{/* <img style="width:100%;" /> */}
-			// 				</div>
-			// 				<div className="text" >
-      //           <input type="text" className="username" placeholder="Username" />
-			// 					<input type="text" className="bio" placeholder="Just assume this is a really good sample bio." />
-			// 				</div>
-			// 			</div>
-			// 			<div className="two">
-			// 				<div className="text_two">
-			// 					<label className="label2">First Name</label> <input type="text" className="input-field2" placeholder="First Name"  />
-			// 					<label className="label2">Last Name</label> <input type="text" className="input-field2" placeholder="Last Name"  />
-			// 					<label className="label2">Age</label> <input type="text" className="input-field2" placeholder="Age"  />
-			// 					<label className="label2">Sex</label> <input type="text" style={{marginBottom:"25px"}} className="input-field2" placeholder="Sex"  />
-			// 					<button className="submit-btn">Edit</button>
-			// 					<button className="submit-btn">Delete account</button>
-			// 				</div>
-			// 			</div>
-			// 		</div>
-			// 	</div>
-			// </div>
 		);
 	}
 }
