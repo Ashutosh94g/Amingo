@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
+using Amingo.Models;
 
-namespace Amingo.Models
+namespace Amingo.Dtos
 {
-	public class User
+	public class UserDetailedDto
 	{
 		public int Id { get; set; }
 		public string Username { get; set; }
-		public byte[] PasswordHash { get; set; }
-		public byte[] PasswordSalt { get; set; }
 		public string Gender { get; set; }
-		public DateTime DateOfBirth { get; set; }
+		public int Age { get; set; }
 		public string KnowAs { get; set; }
 		public DateTime Created_at { get; set; }
 		public DateTime LastActive { get; set; }
@@ -19,6 +18,7 @@ namespace Amingo.Models
 		public string Interests { get; set; }
 		public string City { get; set; }
 		public string Country { get; set; }
+		public string PhotoUrl { get; set; }
 		public ICollection<Photo> Photos { get; set; }
 	}
 }

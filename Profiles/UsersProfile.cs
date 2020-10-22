@@ -1,4 +1,6 @@
+using System.Linq;
 using Amingo.Dtos;
+using Amingo.Helpers;
 using Amingo.Models;
 using AutoMapper;
 
@@ -6,13 +8,26 @@ namespace Amingo.Profiles
 {
 	public class UsersProfile : Profile
 	{
+		//Source => destination
 		public UsersProfile()
 		{
-			//Source => destination
-			CreateMap<User, UserReadDto>();
-			CreateMap<UserCreateDto, User>();
-			CreateMap<UserUpdateDto, User>();
-			CreateMap<User, UserUpdateDto>();
+			CreateMap<User, UserDetailedDto>()
+					.ForMember(dest => dest.PhotoUrl,
+							option => option.MapFrom(src =>
+									src.Photos.FirstOrDefault(
+											photo => photo.IsMain).Url))
+					.ForMember(dest => dest.Age, option => option.MapFrom(src => src.DateOfBirth.CalculateAge()));
+
+
+			CreateMap<User, UserListDto>()
+					.ForMember(dest => dest.PhotoUrl,
+									option => option.MapFrom(src =>
+											src.Photos.FirstOrDefault(
+													photo => photo.IsMain).Url))
+					.ForMember(dest => dest.Age, option => option.MapFrom(src => src.DateOfBirth.CalculateAge()));
+
+
+			CreateMap<Photo, PhotosForDetailedDto>();
 		}
 	}
 }
