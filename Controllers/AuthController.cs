@@ -9,7 +9,7 @@ using Amingo.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-
+using AutoMapper;
 
 namespace Amingo.Controller
 {
@@ -19,11 +19,13 @@ namespace Amingo.Controller
 	{
 		private readonly IAuthRepo _repo;
 		private readonly IConfiguration _config;
+		private readonly IMapper _mapper;
 
-		public AuthController(IAuthRepo repo, IConfiguration config)
+		public AuthController(IAuthRepo repo, IConfiguration config, IMapper mapper)
 		{
 			_repo = repo;
 			_config = config;
+			_mapper = mapper;
 		}
 
 		[HttpPost("register")]
@@ -35,12 +37,11 @@ namespace Amingo.Controller
 			{
 				return BadRequest("Username already taken! please use another one");
 			}
-			var userToCreate = new User
-			{
-				Username = registerAuthDto.Username
-			};
+			var userToCreate = _mapper.Map<User>(registerAuthDto);
 			var created_user = await _repo.Register(userToCreate, registerAuthDto.Password);
-			return StatusCode(201);
+
+			var userToReturn = _mapper.Map<UserDetailedDto>(created_user);
+			return CreatedAtRoute(nameof(UsersController.GetUser), new { controller = "Users", id = created_user.Id }, userToReturn);
 		}
 
 		[HttpGet("Login")]

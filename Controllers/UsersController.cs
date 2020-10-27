@@ -5,6 +5,8 @@ using Amingo.Data;
 using Amingo.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.JsonPatch;
+using System.Security.Claims;
 
 namespace Amingo.Controller
 {
@@ -32,12 +34,34 @@ namespace Amingo.Controller
 		}
 
 		// [AllowAnonymous]
-		[HttpGet("{id}")]
+		[HttpGet("{id}", Name = nameof(GetUser))]
 		public async Task<IActionResult> GetUser(int id)
 		{
 			var user = await _repo.GetUser(id);
 			var userToReturn = _mapper.Map<UserDetailedDto>(user);
 			return Ok(userToReturn);
+		}
+
+		[HttpPatch("{id}")]
+		public async Task<IActionResult> UpdateUser(int id, JsonPatchDocument<UserUpdateDto> userPatchUpdateDto)
+		{
+			if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+				return Unauthorized();
+			var user = await _repo.GetUser(id);
+			var userToPatch = _mapper.Map<UserUpdateDto>(user);
+
+			userPatchUpdateDto.ApplyTo(userToPatch, ModelState);
+			if (!TryValidateModel(userToPatch))
+			{
+				ValidationProblem(ModelState);
+			}
+
+			_mapper.Map(userToPatch, user);
+			if (await _repo.SaveAll())
+			{
+				return NoContent();
+			}
+			return BadRequest("Fields cannot be updated");
 		}
 	}
 }

@@ -30,6 +30,9 @@ namespace Amingo.Profiles
 			CreateMap<Photo, PhotosForDetailedDto>();
 			CreateMap<Photo, PhotoForReturnDto>();
 			CreateMap<PhotoForCreationDto, Photo>();
+			CreateMap<RegisterAuthDto, User>();
+			CreateMap<UserUpdateDto, User>();
+			CreateMap<User, UserUpdateDto>();
 		}
 	}
 }

@@ -24,6 +24,11 @@ namespace Amingo.Data
 			_context.Remove(entity);
 		}
 
+		public void Update<T>(T entity) where T : class
+		{
+			_context.Update(entity);
+		}
+
 		public async Task<Photo> GetMainPhoto(int userId)
 		{
 			return await _context.Photos.Where(p => p.UserId == userId).FirstOrDefaultAsync(p => p.IsMain);
