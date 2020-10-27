@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
 using System.Security.Claims;
+using Amingo.Helpers;
 
 namespace Amingo.Controller
 {
+	[ServiceFilter(typeof(LogUserActivity))]
 	[Authorize]
 	[ApiController]
 	[Route("api/[controller]")]
