@@ -76,6 +76,10 @@ namespace Amingo
 							IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppSettings:Token").Value))
 						};
 					});
+
+			//Cloudinary image api setup 
+			//*****************Helpers namespace class *********************AppSettings.json
+			services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 			// services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			// 					.AddJwtBearer(options =>
 			// 					{

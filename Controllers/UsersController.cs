@@ -31,7 +31,7 @@ namespace Amingo.Controller
 			return Ok(usersToReturn);
 		}
 
-		[AllowAnonymous]
+		// [AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetUser(int id)
 		{

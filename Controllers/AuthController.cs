@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 
-namespace Barlow.Controller
+namespace Amingo.Controller
 {
 	[ApiController]
 	[Route("api/[controller]")]
