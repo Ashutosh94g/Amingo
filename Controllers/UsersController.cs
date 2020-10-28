@@ -30,6 +30,17 @@ namespace Amingo.Controller
 		//****************************************from query is used for telling the http to use initial values from query string
 		public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
 		{
+			//getting id from the token and saving the value in userParams
+			userParams.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+			//getting the user from the repo from the id
+			var userFromRepo = await _repo.GetUser(userParams.UserId);
+
+			if (string.IsNullOrEmpty(userParams.Gender))
+			{
+				userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
+			}
+
+
 			var users = await _repo.GetUsers(userParams);
 			var usersToReturn = _mapper.Map<IEnumerable<UserListDto>>(users);
 
