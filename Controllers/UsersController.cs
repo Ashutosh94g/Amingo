@@ -27,10 +27,15 @@ namespace Amingo.Controller
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> GetUsers()
+		//****************************************from query is used for telling the http to use initial values from query string
+		public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
 		{
-			var users = await _repo.GetUsers();
+			var users = await _repo.GetUsers(userParams);
 			var usersToReturn = _mapper.Map<IEnumerable<UserListDto>>(users);
+
+			//adding pagination information to the response header
+			//since we are in apiController we have access to Response
+			Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
 			return Ok(usersToReturn);
 		}
