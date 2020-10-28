@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,10 +50,31 @@ namespace Amingo.Data
 
 		public async Task<PagedList<User>> GetUsers(UserParams userParams)
 		{
-			var users = _context.Users.Include(u => u.Photos).AsQueryable();
+			var users = _context.Users.Include(u => u.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
 
 			users.Where(u => u.Id != userParams.UserId);
 			users.Where(u => u.Gender == userParams.Gender);
+
+			if (userParams.MinAge != 18 || userParams.MaxAge != 99)
+			{
+				var fromdob = DateTime.Now.AddYears(-userParams.MaxAge - 1);
+				var todob = DateTime.Now.AddYears(-userParams.MinAge);
+
+				users = users.Where(u => u.DateOfBirth >= fromdob && u.DateOfBirth <= todob);
+			}
+			if (!string.IsNullOrEmpty(userParams.OrderBy))
+			{
+				switch (userParams.OrderBy)
+				{
+					case "Created_at":
+						users = users.OrderByDescending(u => u.Created_at);
+						break;
+					default:
+						users = users.OrderByDescending(u => u.LastActive);
+						break;
+				}
+			}
+
 			return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
 		}
 
