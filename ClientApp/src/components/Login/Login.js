@@ -5,10 +5,12 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import MailIcon from '@material-ui/icons/Mail';
 import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+
+import MenuItem from '@material-ui/core/MenuItem';
 
 import "./Login.css";
+import SignUp from './SignUp/SignUp';
+import SignIn from './SignIn/SignIn';
 
 class Login extends Component {
 
@@ -18,20 +20,7 @@ class Login extends Component {
 	
 	state = {
 		classList: "container",
-		fields: {
-			first_name: "",
-			last_name: "",
-			age: 18,
-			sex: "",
-			username: "",
-			password: "",
-			photoUrl: ""
-		},
 		getData: [],
-		signupFields: {
-			username: "",
-			password: ""
-		},
 		logedin: false
 	}
 
@@ -85,7 +74,7 @@ class Login extends Component {
 
 	render() {
 
-		const { first_name, last_name, age, sex, username, password, photoUrl } = this.state.fields;
+		// const { username, password, gender, dateOfBirth, knownAs, city, country } = this.state.fields;
 
 		const buttons = <div><IconButton>
 			<InstagramIcon style={{ color: "#69f0ae" }} fontSize="large" />
@@ -102,112 +91,12 @@ class Login extends Component {
 			<div className={this.state.classList} id="container">
 		
 				<div className="form-container sign-up-container">
-				
-					<form className="form__SignUp" action="#" onSubmit={this.submitHandler}>
-						<h1 className="create__account">Create Account</h1>
-						<div style={{ display: "flex", flexDirection: "column"}} className="social-container">
-							{/* {buttons} */}
-						</div>
-						{/* <span className="spanTag">or use your email for registration</span> */}
-						<div style={{ display: "flex", flexDirection: "row"}}><TextField
-							fullWidth
-							variant="filled"
-							label="First name"
-							type="text" value={first_name}
-							onChange={this.changeHandler}
-							name="first_name"
-						/>
-						<TextField
-							fullWidth
-							variant="filled"
-							label="Last name"
-							type="text" value={last_name}
-							onChange={this.changeHandler}
-							name="last_name"
-							/></div>
-						<div style={{ display: "flex", flexDirection: "row"}}><TextField
-							fullWidth
-							variant="filled"
-							label="age"
-							type="number" value={age}
-							onChange={this.changeHandler}
-							name="age"
-						/>
-						<TextField
-							fullWidth
-							variant="filled"
-							label="Sex"
-							type="text" value={sex}
-							onChange={this.changeHandler}
-							name="sex"
-							/></div>
-						<div style={{ display: "flex", flexDirection: "row"}}>
-						<TextField
-							fullWidth
-							variant="filled"
-							label="Username"
-							type="username"
-							value={username}
-							onChange={this.changeHandler}
-							name="username"
-						/>
-						<TextField
-							fullWidth
-							variant="filled"
-							label="Password"
-							type="password"
-							autoComplete="current-password"
-							name="password"
-							// style={{ marginBottom: 10 }}
-							onChange={this.changeHandler}
-							value={password}
-						/>
-						</div>
-						<TextField
-							fullWidth
-							variant="filled"
-							label="photoUrl"
-							type="text"
-							autoComplete="current-password"
-							name="photoUrl"
-							onChange={this.changeHandler}
-							value={photoUrl}
-						/>
-						<button className="signUp__button" type="submit">Sign up</button>
-					</form>
-
+					<SignUp />
 				</div>
+
+
 				<div className="form-container sign-in-container">
-
-					<form className="form__SignIn" action="#" onSubmit={this.loginsubmitHandler}>
-						<h1 className="signin__account">Sign in</h1>
-						<div className="social-container">
-							{buttons}
-						</div>
-						{/* <span>or use your account</span> */}
-						<TextField
-							fullWidth
-							variant="filled"
-							label="Username"
-							type="username"
-							name="username"
-							value={this.state.signupFields.username}
-							onChange={this.signInChangeHandler}
-						/>
-						<TextField
-							fullWidth
-							variant="filled"
-							label="Password"
-							type="password"
-							autoComplete="current-password"
-							name="password"
-							value={this.state.signupFields.password}
-							onChange={this.signInChangeHandler}
-						/>
-						<Link href="#" color="inherit" style={{ padding: 10 }}>Forgot your password?</Link>
-						<button className="signIn__button" type="submit">Sign In</button>
-					</form>
-
+					<SignIn button={buttons} />
 				</div>
 
 				<div className="overlay-container">

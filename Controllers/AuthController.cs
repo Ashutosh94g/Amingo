@@ -41,10 +41,13 @@ namespace Amingo.Controller
 			var created_user = await _repo.Register(userToCreate, registerAuthDto.Password);
 
 			var userToReturn = _mapper.Map<UserDetailedDto>(created_user);
-			return CreatedAtRoute(nameof(UsersController.GetUser), new { controller = "Users", id = created_user.Id }, userToReturn);
+			var loginUser = new LoginAuthDto() { Username = userToReturn.Username, Password = registerAuthDto.Password };
+			var token = await Login(loginUser);
+			return token;
+			// return CreatedAtRoute(nameof(UsersController.GetUser), new { controller = "Users", id = created_user.Id }, userToReturn);
 		}
 
-		[HttpGet("Login")]
+		[HttpPost("Login", Name = nameof(Login))]
 		public async Task<IActionResult> Login(LoginAuthDto loginAuthDto)
 		{
 			//check if user exists
