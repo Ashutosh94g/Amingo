@@ -19,8 +19,7 @@ class SignUp extends Component {
 				knowAs    	 : "",
 				city         : "",
 				country      : ""
-			},
-			token: ""
+			}
 		}
 	}
 		changeHandler = (e) => {
@@ -36,7 +35,8 @@ class SignUp extends Component {
 		console.log(this.state.fields);
 		Axios.post("/api/auth/register", this.state.fields)
 			.then(response => {
-				console.log(response.data.token);
+				this.props.tokener(response.data.token);
+				this.props.loginer();
 			}).catch(error => {
 				console.log(error);
 			})

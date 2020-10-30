@@ -1,19 +1,20 @@
-import React, {Component} from 'react';
+import React, {Component, lazy, Suspense} from 'react';
 import {
   BrowserRouter,
 	Route,
 	Redirect
 } from "react-router-dom";
 
-import Header from "../components/Header/Header";
-import Chats from "../components/Chats/Chats";
-import Login from "../components/Login/Login";
-import Profile from "../components/Profile/Profile"
 import './App.css';
 
-import Home from './Home';
-import EditProfile from '../components/Profile/EditProfile';
-import DeleteProfile from "../components/Profile/DeleteProfile";
+
+const Home = lazy(() => import('./Home'));
+const Header = lazy(() => import("../components/Header/Header"));
+const Chats = lazy(() => import("../components/Chats/Chats"));
+const Login = lazy(() => import("../components/Login/Login"));
+const Profile = lazy(() => import("../components/Profile/Profile"));
+const EditProfile = lazy(() => import("../components/Profile/EditProfile"));
+const DeleteProfile = lazy(() => import("../components/Profile/DeleteProfile"));
 
 
 
@@ -21,13 +22,20 @@ class App extends Component {
 
 	state = {
 		userlogedin: false,
-		id: 9
+		id: 9,
+		token: ""
 	}
 
 	loginStateHandler = () => {
 		const userlog = this.state.userlogedin;
 		this.setState({ userlogedin: !userlog })
 	}
+
+	tokenHandler = (token) => {
+		this.setState({ token: token });
+		console.log(token);
+	};
+
 	getUserId = (id) => {
 		this.setState({id: id})
 	}
@@ -36,9 +44,10 @@ class App extends Component {
 		return (
 			<div className="App">
 				<BrowserRouter>
+					<Suspense fallback="<div>Loading...</div>">
 					{!this.state.userlogedin ?
 						<Route path="/">
-							<Login loginer={this.loginStateHandler} getId={(id) => this.getUserId(id)} />
+							<Login loginer={this.loginStateHandler} getId={(id) => this.getUserId(id)} tokener={(token) => this.tokenHandler(token)} />
 						</Route> : <div><Route path="/" exact>
 								<div><Route path="/" exact component={Header} /><Home /></div>
 						</Route>
@@ -62,7 +71,8 @@ class App extends Component {
 									<Redirect to="/" />: null
 								}
 							</Route></div>
-					}
+						}
+						</Suspense>
 				</BrowserRouter>
 			</div>
 		)

@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Axios from 'axios';
 import TinderCard from "react-tinder-card";
 import "./TinderCards.css"
 class TinderCards extends Component {
@@ -10,7 +11,11 @@ class TinderCards extends Component {
 	}
 
 	componentDidMount() {
-    this.populateTinderCardsData();
+		Axios.get("/api/users/", {
+			params: {
+				
+			}
+		})
   }
 
 	render() { 
@@ -32,11 +37,6 @@ class TinderCards extends Component {
 		</div>
 		);
 	}
-	async populateTinderCardsData() {
-    const response = await fetch('api/Users');
-    const data = await response.json();
-    this.setState({ people: data });
-  }
 }
 
 export default TinderCards;
