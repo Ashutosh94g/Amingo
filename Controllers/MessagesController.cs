@@ -64,8 +64,8 @@ namespace Amingo.Controllers
 				return Unauthorized();
 
 			var messageThread = await _repo.GetMessageThread(userId, receiverId);
-			_mapper.Map<IEnumerable<MessageToReturnDto>>(messageThread);
-			return Ok(messageThread);
+			var messageThreadToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messageThread);
+			return Ok(messageThreadToReturn);
 		}
 
 		[HttpPost]

@@ -44,13 +44,13 @@ namespace Amingo.Data
 
 		public async Task<User> GetUser(int id)
 		{
-			var user = await _context.Users.Include(u => u.Photos).FirstOrDefaultAsync(u => u.Id == id);
+			var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 			return user;
 		}
 
 		public async Task<PagedList<User>> GetUsers(UserParams userParams)
 		{
-			var users = _context.Users.Include(u => u.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
+			var users = _context.Users.OrderByDescending(u => u.LastActive).AsQueryable();
 
 			users = users.Where(u => u.Id != userParams.UserId);
 			users = users.Where(u => u.Gender == userParams.Gender);
@@ -91,10 +91,7 @@ namespace Amingo.Data
 
 		private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers)
 		{
-			var user = await _context.Users
-			.Include(x => x.Likees)
-			.Include(x => x.Likers)
-			.FirstOrDefaultAsync(u => u.Id == id);
+			var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
 			if (likers)
 			{
@@ -123,10 +120,7 @@ namespace Amingo.Data
 
 		public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
 		{
-			var messages = _context.Messages
-				.Include(u => u.Sender).ThenInclude(p => p.Photos)
-				.Include(u => u.Receiver).ThenInclude(p => p.Photos)
-				.AsQueryable();
+			var messages = _context.Messages.AsQueryable();
 
 			switch (messageParams.MessageContainer)
 			{
@@ -147,8 +141,6 @@ namespace Amingo.Data
 		public async Task<IEnumerable<Message>> GetMessageThread(int userId, int receiverId)
 		{
 			var messages = await _context.Messages
-				.Include(u => u.Sender).ThenInclude(p => p.Photos)
-				.Include(u => u.Receiver).ThenInclude(p => p.Photos)
 				.Where(m => m.SenderId == userId && m.ReceiverId == receiverId && m.SenderDelete == false
 					|| m.SenderId == receiverId && m.ReceiverId == userId && m.ReceiverDelete == false)
 				.OrderByDescending(m => m.MessageSent)

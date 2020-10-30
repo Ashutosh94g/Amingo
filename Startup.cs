@@ -33,9 +33,12 @@ namespace Amingo
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<UserDataContext>(option => option.UseMySQL(
-				Configuration.GetConnectionString("Default")
-			));
+			services.AddDbContext<UserDataContext>(option =>
+				{
+					option.UseLazyLoadingProxies();
+					option.UseMySQL(Configuration.GetConnectionString("Default"));
+				}
+			);
 			// services.AddScoped<IUserData, MockUserData>();
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 			services.AddCors();
