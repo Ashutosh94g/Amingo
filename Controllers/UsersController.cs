@@ -83,7 +83,7 @@ namespace Amingo.Controller
 			return BadRequest("Fields cannot be updated");
 		}
 
-		[HttpPost("{id}/like/{recipientId}")]
+		[HttpPost("{id}/like/{receiverId}")]
 		public async Task<IActionResult> LikeUser(int id, int recipientId)
 		{
 			if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
