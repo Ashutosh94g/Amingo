@@ -33,6 +33,12 @@ namespace Amingo.Profiles
 			CreateMap<RegisterAuthDto, User>();
 			CreateMap<UserUpdateDto, User>();
 			CreateMap<User, UserUpdateDto>();
+			CreateMap<MessageForCreationDto, Message>().ReverseMap();
+			CreateMap<Message, MessageToReturnDto>()
+				.ForMember(m => m.SenderPhotoUrl, option => option
+					.MapFrom(m => m.Sender.Photos.FirstOrDefault(p => p.IsMain)))
+				.ForMember(m => m.ReceiverPhotoUrl, option => option
+					.MapFrom(m => m.Receiver.Photos.FirstOrDefault(p => p.IsMain)));
 		}
 	}
 }
