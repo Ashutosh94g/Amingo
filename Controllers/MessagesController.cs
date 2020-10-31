@@ -84,6 +84,28 @@ namespace Amingo.Controllers
 			}
 
 			var message = _mapper.Map<Message>(messageForCreationDto);
+
+			var like = await _repo.GetLike(userId, receiver.Id);
+			var reverseLike = await _repo.GetLike(receiver.Id, userId);
+
+			if (like == null && reverseLike == null)
+				return BadRequest("Cannot message without a match");
+
+			if (like != null)
+			{
+				if (like.Match == false)
+				{
+					return BadRequest("Cannot message without a match");
+				}
+			}
+			if (reverseLike != null)
+			{
+				if (reverseLike.Match == false)
+				{
+					return BadRequest("Cannot message without a match");
+				}
+			}
+
 			_repo.Add(message);
 			if (await _repo.SaveAll())
 			{

@@ -22,15 +22,14 @@
 #### Post Request
 ###### Register: "https://localhost:{port}/api/Auth/register"
     {
-     "username"     : "testuser"
-     "password"     : "Password@1"
-     "gender"       : "Male"/ "female"
-     "dateOfBirth"  : "12/04/2000"
-     "knownAs"      : "user"
-     "city"         : "Delhi"
+     "username"     : "testuser",
+     "password"     : "Password@1",
+     "gender"       : "Male"/ "female",
+     "dateOfBirth"  : "12/04/2000",
+     "knownAs"      : "user",
+     "city"         : "Delhi",
      "country"      : "India"
      }
-#### Get Request
 ###### Login   : "https://localhost:{port}/api/Auth/login"
      { 
        "username": "testuser",
@@ -89,8 +88,8 @@
  
 ###### Create Message    : "https://localhost:{port}/api/users/{userId}/messages"
         {
-          "senderId"    : 1
-          "receiverId"  : 2
+          "senderId"    : 1,
+          "receiverId"  : 2,
           "content"     : "Hello"
         }
 ###### MarkAsRead Message: "https://localhost:{port}/api/users/{userId}/messages/{id}/read"
