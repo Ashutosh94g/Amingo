@@ -22,13 +22,12 @@ class App extends Component {
 
 	state = {
 		userlogedin: false,
-		id: 9,
+		user: "",
 		token: ""
 	}
 
 	loginStateHandler = () => {
-		const userlog = this.state.userlogedin;
-		this.setState({ userlogedin: !userlog })
+
 	}
 
 	tokenHandler = (token) => {
@@ -40,14 +39,22 @@ class App extends Component {
 		this.setState({id: id})
 	}
 
+	logedInUser = (user) => {
+		const userlog = this.state.userlogedin;
+		this.setState({ user: user,  userlogedin: !userlog});
+	}
+
 	render() {
 		return (
 			<div className="App">
 				<BrowserRouter>
-					<Suspense fallback="<div>Loading...</div>">
+					<Suspense fallback="Loading...">
 					{!this.state.userlogedin ?
 						<Route path="/">
-							<Login loginer={this.loginStateHandler} getId={(id) => this.getUserId(id)} tokener={(token) => this.tokenHandler(token)} />
+								<Login
+									logedInUser={(userToReturn) => this.logedInUser(userToReturn)}
+									tokener={(token) => this.tokenHandler(token)}
+								/>
 						</Route> : <div><Route path="/" exact>
 								<div><Route path="/" exact component={Header} /><Home /></div>
 						</Route>

@@ -83,11 +83,13 @@ namespace Amingo.Controller
 
 			//token is created based on token descriptor
 			var token = tokenHandler.CreateToken(tokenDescriptor);
+			var userToReturn = _mapper.Map<UserDetailedDto>(user);
 
 			return Ok(new
 			{
 				//write token parts which is too send back to client
-				token = tokenHandler.WriteToken(token)
+				token = tokenHandler.WriteToken(token),
+				userToReturn
 			});
 		}
 	}

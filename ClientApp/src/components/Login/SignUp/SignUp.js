@@ -36,7 +36,7 @@ class SignUp extends Component {
 		Axios.post("/api/auth/register", this.state.fields)
 			.then(response => {
 				this.props.tokener(response.data.token);
-				this.props.loginer();
+				this.props.logedInUser(response.data.userToReturn);
 			}).catch(error => {
 				console.log(error);
 			})

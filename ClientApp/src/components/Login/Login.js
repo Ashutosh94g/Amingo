@@ -17,10 +17,6 @@ class Login extends Component {
 		logedin: false
 	}
 
-	tokenHandler = (token) => {
-		this.props.tokener(token);
-	};
-
 	render() {
 
 		const buttons = <div><IconButton>
@@ -38,12 +34,19 @@ class Login extends Component {
 			<div className={this.state.classList} id="container">
 		
 				<div className="form-container sign-up-container">
-					<SignUp loginer={this.props.loginer} tokener={(token) => this.tokenHandler(token)} />
+					<SignUp
+						tokener={(token) => this.tokenHandler(token)}
+						logedInUser={(userToReturn) => this.props.logedInUser(userToReturn)}
+					/>
 				</div>
 
 
 				<div className="form-container sign-in-container">
-					<SignIn button={buttons}  loginer={this.props.loginer} tokener={(token) => this.tokenHandler(token)} />
+					<SignIn
+						button={buttons}
+						tokener={(token) => this.props.tokener(token)}
+						logedInUser={(userToReturn) => this.props.logedInUser(userToReturn)}
+					/>
 				</div>
 
 				<div className="overlay-container">

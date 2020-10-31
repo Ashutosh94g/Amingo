@@ -27,8 +27,8 @@ class SignIn extends Component {
 		e.preventDefault();
 		Axios.post("/api/auth/login", this.state.fields)
 			.then(response => {
+				this.props.logedInUser(response.data.userToReturn);
 				this.props.tokener(response.data.token);
-				this.props.loginer();
 			}).catch(error => {
 				console.log(error);
 			})
