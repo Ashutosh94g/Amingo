@@ -103,19 +103,30 @@ namespace Amingo.Controller
 				return NotFound();
 			}
 
-			like = new Like
+			//first like
+			if (like == null && reverseLike == null)
 			{
-				LikeeId = receiverId,
-				LikerId = id
-			};
-			_repo.Add<Like>(like);
+				like = new Like
+				{
+					LikeeId = receiverId,
+					LikerId = id
+				};
+				_repo.Add<Like>(like);
+			}
+
+			//Match like
+			if (reverseLike != null)
+			{
+				reverseLike.Match = true;
+			}
+
 
 			if (await _repo.SaveAll())
 			{
-				if (reverseLike != null)
-					return Ok();
-
-				return Ok();
+				if (reverseLike.Match == true)
+					return Ok(_mapper.Map<LikeToReturnDto>(reverseLike));
+				// client side check if userId == response.data.likerId then first like else match like
+				return Ok(_mapper.Map<LikeToReturnDto>(like));
 			}
 
 

@@ -39,6 +39,8 @@ namespace Amingo.Profiles
 					.MapFrom(m => m.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
 				.ForMember(m => m.ReceiverPhotoUrl, option => option
 					.MapFrom(m => m.Receiver.Photos.FirstOrDefault(p => p.IsMain).Url));
+
+			CreateMap<Like, LikeToReturnDto>();
 		}
 	}
 }
