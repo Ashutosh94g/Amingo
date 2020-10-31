@@ -19,7 +19,8 @@ class SignUp extends Component {
 				knowAs    	 : "",
 				city         : "",
 				country      : ""
-			}
+			},
+			next: false
 		}
 	}
 		changeHandler = (e) => {
@@ -53,6 +54,13 @@ class SignUp extends Component {
 	dateChangeHandler = (e) => {
 		this.setState({ fields: { ...this.state.fields, dateOfBirth: e.target.value.toString() } })
 	};
+
+	nextPage = () => {
+		const next = this.state.next;
+		this.setState({ next:  !next});
+	};
+
+
 	render() { 
 		const { username, password, gender, dateOfBirth, knowAs, city, country } = this.state.fields;
 
@@ -73,7 +81,7 @@ class SignUp extends Component {
 			fullWidth
 			variant="filled"
 			label="Username"
-			type="username"
+			type="text"
 			value={username}
 			onChange={this.changeHandler}
 			name="username"
@@ -90,7 +98,6 @@ class SignUp extends Component {
 
 		const genderField = <FormControl fullWidth>
 			<InputLabel
-				fullWidth
 				style={{ marginLeft: "12px" }}
 				id="Gender">Gender
 						</InputLabel>
@@ -111,7 +118,6 @@ class SignUp extends Component {
 		</FormControl>;
 
 		const dateOfBirthField = <TextField
-			fullWidth
 			id="date"
 			label="Birthday"
 			variant="filled"
@@ -123,7 +129,6 @@ class SignUp extends Component {
 			}} />;
 		
 		const cityField = <TextField
-			fullWidth
 			variant="filled"
 			label="City"
 			type="text" value={city}
@@ -132,38 +137,38 @@ class SignUp extends Component {
 		/>;
 
 		const countryField = <TextField
-			fullWidth
 			variant="filled"
 			label="Country"
 			type="text" value={country}
 			onChange={this.changeHandler}
 			name="country"
 		/>;
-		
+		let signupcomp = <div>
+			{nameField}
+			{dateOfBirthField}
+			{genderField}
+			{cityField}
+			<button onClick={this.nextPage}>Next</button>
+		</div>;
+		signupcomp = this.state.next ? 
+			<div>
+				{usernameField}
+				{/* {countryField} */}
+				{passwordField}
+				<button onClick={this.nextPage}>Back</button>
+				<button className="signUp__button" onClick={this.submitHandler}>Signup</button>
+			</div>: signupcomp
+			
+	
 		return ( 
-		<form className="form__SignUp" action="#" onSubmit={this.submitHandler}>
+			
+		<form className="form__SignUp" onSubmit={this.submitHandler}>
 						<h1 className="create__account">Create Account</h1>
 						<div style={{ display: "flex", flexDirection: "column"}} className="social-container">
-							{/* {buttons} */}
+							{this.props.button}
 						</div>
-						<div>
-						<div style={{display: "flex", flexDirection: "row"}}>
-							{nameField}
-							{genderField}
-						</div>
-							{dateOfBirthField}
-					
-				<div style={{flexDirection: "row", display: "flex"}}>
-					{usernameField}
-					<div>{cityField}</div>
-				</div>
-				<div style={{flexDirection: "row", display: "flex"}}>
-					{passwordField}
-					<div>{countryField}</div>
-				</div>
-			</div>
-						<button className="signUp__button" type="submit">Sign up</button>
-					</form>
+				{signupcomp}
+			</form>
 			
 		);
 	}

@@ -3,6 +3,8 @@ import TinderCards from "../components/TinderCards/TinderCards";
 import SwipeButtons from "../components/SwipeButtons/SwipeButtons";
 
 
+
+
 class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -11,7 +13,7 @@ class Home extends Component {
 	render() { 
 		return ( 
 			<div className="Home">
-				<TinderCards />
+				<TinderCards token={this.props.token} bio={this.props.bio} />
 				<SwipeButtons />
 			</div>
 		);

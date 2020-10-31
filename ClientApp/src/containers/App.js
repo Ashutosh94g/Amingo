@@ -56,7 +56,7 @@ class App extends Component {
 									tokener={(token) => this.tokenHandler(token)}
 								/>
 						</Route> : <div><Route path="/" exact>
-								<div><Route path="/" exact component={Header} /><Home /></div>
+								<div><Route path="/" exact component={Header} /><Home token={this.state.token} bio={this.state.user} /></div>
 						</Route>
 							<Route path="/Chats" exact>
 								<Header backButton="/" />

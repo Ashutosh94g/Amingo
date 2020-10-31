@@ -35,7 +35,8 @@ class Login extends Component {
 		
 				<div className="form-container sign-up-container">
 					<SignUp
-						tokener={(token) => this.tokenHandler(token)}
+						button={buttons}
+						tokener={(token) => this.props.tokener(token)}
 						logedInUser={(userToReturn) => this.props.logedInUser(userToReturn)}
 					/>
 				</div>

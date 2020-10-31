@@ -84,35 +84,40 @@ namespace Amingo.Controller
 		}
 
 		[HttpPost("{id}/like/{receiverId}")]
-		public async Task<IActionResult> LikeUser(int id, int recipientId)
+		public async Task<IActionResult> LikeUser(int id, int receiverId)
 		{
 			if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
 				return Unauthorized();
 
 			//Checking if the user already liked recipient user 
-			var like = await _repo.GetLike(id, recipientId);
+			var like = await _repo.GetLike(id, receiverId);
+			var reverseLike = await _repo.GetLike(receiverId, id);
 
 			if (like != null)
 			{
 				return BadRequest("User already liked");
 			}
 
-			if (await _repo.GetUser(recipientId) == null)
+			if (await _repo.GetUser(receiverId) == null)
 			{
 				return NotFound();
 			}
 
 			like = new Like
 			{
-				LikeeId = recipientId,
+				LikeeId = receiverId,
 				LikerId = id
 			};
 			_repo.Add<Like>(like);
 
 			if (await _repo.SaveAll())
 			{
+				if (reverseLike != null)
+					return Ok();
+
 				return Ok();
 			}
+
 
 			return BadRequest("Failed to like user");
 		}
