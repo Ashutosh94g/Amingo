@@ -52,8 +52,14 @@ namespace Amingo.Data
 		{
 			var users = _context.Users.OrderByDescending(u => u.LastActive).AsQueryable();
 
+			//logedIn user must not see his own id
 			users = users.Where(u => u.Id != userParams.UserId);
+			//filter ids of opposite gender
 			users = users.Where(u => u.Gender == userParams.Gender);
+
+			//filter out already liked users 
+			var usersWithoutLikes = await GetUserLikes(userParams.UserId, false);
+			users = users.Where(u => !usersWithoutLikes.Contains(u.Id));
 
 			if (userParams.Likers)
 			{
@@ -108,9 +114,9 @@ namespace Amingo.Data
 			return await _context.SaveChangesAsync() > 0;
 		}
 
-		public async Task<Like> GetLike(int userId, int recipientId)
+		public async Task<Like> GetLike(int userId, int receiverId)
 		{
-			return await _context.Likes.FirstOrDefaultAsync(u => u.LikerId == userId && u.LikeeId == recipientId);
+			return await _context.Likes.FirstOrDefaultAsync(u => u.LikerId == userId && u.LikeeId == receiverId);
 		}
 
 		public async Task<Message> GetMessage(int id)
@@ -147,6 +153,28 @@ namespace Amingo.Data
 				.ToListAsync();
 
 			return messages;
+		}
+
+		public async Task<bool> CheckMatch(int userId, int receiverId)
+		{
+			var user1 = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+			var user2 = await _context.Users.FirstOrDefaultAsync(u => u.Id == receiverId);
+
+			var like = _context.Likes
+				.Where(l => l.LikeeId == user1.Id && l.LikerId == user2.Id && l.Match == true
+					|| l.LikeeId == user2.Id && l.LikerId == user1.Id && l.Match == true);
+
+			if (like == null)
+				return false;
+			return true;
+		}
+
+		public async Task<bool> CheckLike(int userId, int receiverId)
+		{
+			var like = await _context.Likes.FirstOrDefaultAsync(l => l.LikerId == userId && l.LikeeId == receiverId);
+			if (like == null)
+				return false;
+			return true;
 		}
 	}
 }

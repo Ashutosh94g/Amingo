@@ -14,10 +14,12 @@ namespace Amingo.Data
 		Task<User> GetUser(int id);
 		Task<Photo> GetPhoto(int id);
 		Task<Photo> GetMainPhoto(int userId);
-		Task<Like> GetLike(int userId, int recipientId);
+		Task<Like> GetLike(int userId, int receiverId);
 		Task<Message> GetMessage(int id);
 		Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
 		Task<IEnumerable<Message>> GetMessageThread(int userId, int receiverId);
+		Task<bool> CheckMatch(int userId, int receiverId);
+		Task<bool> CheckLike(int userId, int receiverId);
 		void Update<T>(T entity) where T : class;
 	}
 }

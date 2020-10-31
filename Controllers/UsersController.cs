@@ -123,7 +123,7 @@ namespace Amingo.Controller
 
 			if (await _repo.SaveAll())
 			{
-				if (reverseLike.Match == true)
+				if (reverseLike != null)
 					return Ok(_mapper.Map<LikeToReturnDto>(reverseLike));
 				// client side check if userId == response.data.likerId then first like else match like
 				return Ok(_mapper.Map<LikeToReturnDto>(like));
