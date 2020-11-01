@@ -38,7 +38,7 @@ class TinderCards extends Component {
 
 	onSwipe= (profile, direction) => {
 		console.log("direction: " + direction, "profile: " + profile);
-		(direction == 'right') ? this.rightHandler(profile): this.leftHandler(profile)
+		(direction === 'right') ? this.rightHandler(profile): this.leftHandler(profile)
 	};
 	onCardLeftScreen = (e) => {
 		console.log(e);
@@ -58,7 +58,7 @@ class TinderCards extends Component {
 						>
 							<div className="card" style={{
 								backgroundImage: (profile.photoUrl != null) ?
-									`url(${profile.photoUrl})` : (profile.gender == "male") ?
+									`url(${profile.photoUrl})` : (profile.gender === "male") ?
 										`url("https://cdn.pixabay.com/photo/2016/07/28/01/13/boy-1546843_1280.jpg")` :
 										`url("https://cdn.pixabay.com/photo/2018/03/12/12/32/woman-3219507_960_720.jpg")`
 							}}>

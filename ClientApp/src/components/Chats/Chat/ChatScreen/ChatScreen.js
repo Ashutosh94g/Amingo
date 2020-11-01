@@ -1,36 +1,42 @@
-import React, {useState} from 'react';
+import React, { Component } from 'react';
+import axios from "axios";
 
 import Avatar from "@material-ui/core/Avatar";
 
 import "./ChatScreen.css";
 
-function ChatScreen() {
-	const [input, setInput] = useState('');
-	const [messages, setMessages] = useState([
-		{
-			name: "Muskan",
-			image: "https://images.pexels.com/photos/1368382/pexels-photo-1368382.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-			message: "Hello"
-		},
-		{
-			name: "Muskan",
-			image: "https://images.pexels.com/photos/1368382/pexels-photo-1368382.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-			message: "How is it going?"
-		},
-		{
-			message: "Hi! How is it hanging?"
-		},
-	]);
-	let handleSend = (e) => {
-		e.preventDefault();
-		setMessages([...messages, {message: input}])
-		setInput('');
+class ChatScreen extends Component {
+	state = {
+		messages: [],
+		input: ""
 	}
-	return (
-		<div className="chatScreen">
-			<p className = "chatScreen__timeStamp"> {`You matched with Kunika on 28 / 4 / 2019 `}</p>
-			{messages.map((arrMess) => 
-			arrMess.name ? (
+
+	componentDidMount() {
+		console.log(this.props.user)
+		axios.defaults.headers.common['Authorization'] = "Bearer " + this.props.token;
+		axios.get(`api/users/${this.props.bio.id}/messages/thread/${this.props.user}`)
+			.then(response => {
+				this.setState({ messages: response.data })
+				console.log(this.state.messages)
+			}).catch(error => {
+				console.log(error)
+			})
+	}
+
+	changeHandler = (e) => {
+		this.setState({ input: e.target.value })
+	};
+
+	submitHandler = () => {
+		console.log(this.state.input);
+	}
+
+	render() { 
+		return (
+			<div className="chatScreen">
+			{/* <p className = "chatScreen__timeStamp"> {`You matched with Kunika on 28 / 4 / 2019 `}</p> */}
+			{this.state.messages.map((arrMess) => 
+			arrMess.username == this.props.bio.username ? (
 				<div className="chatScreen__messages">
 				<Avatar
 				src={arrMess.image} 
@@ -46,11 +52,11 @@ function ChatScreen() {
 			)}
 			
 			<form className = "chatScreen__input">
-				<input className="chatScreen__inputField" type="text" placeholder="Write a message..." value={input} onChange={(e) => setInput(e.target.value)} />
-				<button type="submit" onClick={handleSend} className="chatScreen__inputButton">SEND</button>
+				<input className="chatScreen__inputField" type="text" placeholder="Write a message..." value={this.state.input} onChange={this.changeHandler} />
+				<button type="submit" onClick={this.submitHandler} className="chatScreen__inputButton">SEND</button>
 			</form>
-		</div>
-	)
+		</div>);
+	}
 }
 
 export default ChatScreen;
