@@ -17,22 +17,16 @@ import { Link, Redirect } from "react-router-dom";
 class Profile extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			fields: {}
-		}
-		Axios.get(`api/Users/${this.props.id}`).then(response => {
-			this.setState({ fields: response.data })
-			console.log(this.state.fields)
-		}).catch(error => {
-			alert(error);
-		})
+		this.state = {}
 	}
 
 
 	
 
 	render() {
-		const { first_name, last_name, age, sex, username, password, photoUrl } = this.state.fields;
+		const { id, username, gender, age, knowAs, photoUrl } = this.props.bio;
+		console.log(this.props.bio);
+
 		return (
 			<Card className="Profile" style={{maxWidth: 345}}>
       <CardActionArea>
@@ -45,10 +39,10 @@ class Profile extends Component {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {username} | {age} | {sex}
+            {username} | {age} | {gender}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="h3">
-							Name: {first_name} {last_name}
+							Name: {knowAs}
 						</Typography>
         </CardContent>
       </CardActionArea>

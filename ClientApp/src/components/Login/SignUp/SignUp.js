@@ -70,9 +70,7 @@ class SignUp extends Component {
 			variant="filled"
 			label="Password"
 			type="password"
-			autoComplete="current-password"
 			name="password"
-			// style={{ marginBottom: 10 }}
 			onChange={this.changeHandler}
 			value={password} />;
 		
@@ -118,6 +116,7 @@ class SignUp extends Component {
 		</FormControl>;
 
 		const dateOfBirthField = <TextField
+			fullWidth
 			id="date"
 			label="Birthday"
 			variant="filled"
@@ -129,6 +128,7 @@ class SignUp extends Component {
 			}} />;
 		
 		const cityField = <TextField
+			fullWidth
 			variant="filled"
 			label="City"
 			type="text" value={city}
@@ -137,6 +137,7 @@ class SignUp extends Component {
 		/>;
 
 		const countryField = <TextField
+			fullWidth
 			variant="filled"
 			label="Country"
 			type="text" value={country}
@@ -147,13 +148,15 @@ class SignUp extends Component {
 			{nameField}
 			{dateOfBirthField}
 			{genderField}
+			<div style={{display: "flex", flexDirection: "row"}}> 
 			{cityField}
+			{countryField}
+			</div>
 			<button onClick={this.nextPage}>Next</button>
 		</div>;
 		signupcomp = this.state.next ? 
 			<div>
 				{usernameField}
-				{/* {countryField} */}
 				{passwordField}
 				<button onClick={this.nextPage}>Back</button>
 				<button className="signUp__button" onClick={this.submitHandler}>Signup</button>

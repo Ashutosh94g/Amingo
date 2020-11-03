@@ -76,15 +76,15 @@ class App extends Component {
 							{/* <Route path="/Login" exact component={Header} /> */}
 							<Route path="/profile" exact>
 								<Header backButton="/" />
-								<Profile id={this.state.id} loginer={this.loginStateHandler} />
+								<Profile bio={this.state.user} loginer={this.loginStateHandler} />
 							</Route>
 							<Route path="/profile/edit" exact>
 								<Header backButton="/profile" />
-								<EditProfile id={this.state.id} />
+								<EditProfile id={this.state.bio} />
 							</Route>
 						<Route path="/profile/delete" exact>
 								<Header backButton="/profile" />
-								<DeleteProfile id={this.state.id} loginer={this.loginStateHandler} />
+								<DeleteProfile id={this.state.bio} loginer={this.loginStateHandler} />
 								{!this.state.userlogedin ? 
 									<Redirect to="/" />: null
 								}
